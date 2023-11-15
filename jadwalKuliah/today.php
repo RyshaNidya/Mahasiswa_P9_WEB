@@ -100,9 +100,12 @@
             
             $dos = mysqli_query($kon, "SELECT dosen.*, jadwal_kuliah.*
                       FROM dosen INNER JOIN jadwal_kuliah ON dosen.nidn=jadwal_kuliah.nidn 
-                      ORDER BY jadwal_kuliah.tgl");
+                      ");
                       
-            while ($data = mysqli_fetch_assoc($dos) and $data['tgl'] == date("Y-m-d")) {
+            while ($data = mysqli_fetch_assoc($dos) ) {
+          ?>
+          <?php 
+            if($data['tgl'] == date("Y-m-d")){
           ?>
             <tr>
               <th><?php echo $data['hari'] ?></th>
@@ -125,7 +128,9 @@
               </td>
               <td><?php echo $data['ruang'] ?></td>
             </tr>
-
+            <?php
+            }
+            ?>
           <?php
           }
           ?>
